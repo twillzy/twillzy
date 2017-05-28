@@ -7,3 +7,12 @@ script:
 - echo "TODO"
 after_success:
 - yarn run build
+deploy:
+  provider: s3
+  access_key_id: "AKIAJQ6UQ5FNVMFIAAYQ"
+  secret_access_key:
+    secure: "Gx0rA37wJ4ULXa1K8pV//qcwqSpY68zQrVFlwGYBFA80T1jIeTbZo/pHWMvUKnwg2LUhL29C3RElwusCbBJkrh50reswXQ8zNdpLnZblkZwRBvSr9+kXRWpjyefmGiVELJzWoq78kzOChehlg0SvObKK0ylv5fNQgUynvQinqkfoFsUG/Llfd/CPFyhJZj0SiuP+SqSW453h5YCpQC+RD2cGVWFB3XX/wV6r2cpW2xqVIuXtFGzAtYUfph6qblL6HdDLxHN6uuqLFrlMyhptDjtnGAqhq/YykhQPfUwINeGIGwqoSD+C6g+vxryTZWF09KZ6F2swutGVVPX/pXbei5/kLd3+Nw2rdXzqX5t/ftMQwsZKwBCHhlFrm5BDG9MIE2irsR8lFoFXvTg1rBifAgZiOjngYuGC0QRwxZhtO1EJmpVX5PXrFcFmeeGBx8NajPcI06VlH/IpDzFYyIQFCPGIfSbMoOHOqF8zUb6pJbqGtUwgEBMlYskhAMZdZiZ/ENqBZGoln5ZbIv5sT2fhvcnO8tFfyqI1p8Jwe+p7YmmiDQetoRJR58bEc23y0Z2E4Km6b0F205yPl2Wr1rzuk5QJ/TpZShQisAZFJxEbiU6Fn0ipL5AnEoTOSefOM4+0IdfmppasioNKb3+XO6S8n27XNsP9bTC0JV1p1FSlsVI="
+  bucket: "twillzy.com"
+  skip_cleanup: true
+  region: ap-southeast-2
+  local_dir: dist
