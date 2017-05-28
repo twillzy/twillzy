@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+- "node"
+install:
+- yarn run install
+script:
+- echo "TODO"
+after_success:
+- yarn run build
