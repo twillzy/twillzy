@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - "node"
 install:
-- yarn run install
+- yarn install
 script:
 - echo "TODO"
 after_success:
