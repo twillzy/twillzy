@@ -1,63 +1,107 @@
 module Main exposing (..)
+
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing ( onClick )
-
--- component import example
-import Components.Hello exposing ( hello )
+import Html.Events exposing (onClick)
 
 
 -- APP
-main : Program Never Int Msg
+
+
+main : Program Never Blogger Msg
 main =
-  Html.beginnerProgram { model = model, view = view, update = update }
+    Html.beginnerProgram { model = twillzy, view = view, update = update }
+
 
 
 -- MODEL
-type alias Model = Int
 
-model : number
-model = 0
+
+type alias Blogger =
+    { name : String
+    , occupation : String
+    , company : String
+    , profilePic : String
+    , githubUrl : String
+    , twitterUrl : String
+    }
+
+
+twillzy : Blogger
+twillzy =
+    { name = "Will Tan"
+    , occupation = "Software developer"
+    , company = "ThoughtWorks"
+    , profilePic = "static/img/twillzy.jpg"
+    , githubUrl = "https://github.com/twillzy"
+    , twitterUrl = "https://twitter.com/twillzy89"
+    }
+
+
+prisonerFatCat : Blogger
+prisonerFatCat =
+    { name = "Pris"
+    , occupation = "Tech lead"
+    , company = "Google"
+    , profilePic = "static/img/pris.jpg"
+    , githubUrl = "#"
+    , twitterUrl = "https://www.instagram.com/pristhecat/"
+    }
+
 
 
 -- UPDATE
-type Msg = NoOp | Increment
 
-update : Msg -> Model -> Model
-update msg model =
-  case msg of
-    NoOp -> model
-    Increment -> model + 1
+
+type Msg
+    = ToggleImage
+
+
+update : Msg -> Blogger -> Blogger
+update msg blogger =
+    case msg of
+        ToggleImage ->
+            if blogger == twillzy then
+                prisonerFatCat
+            else
+                twillzy
+
 
 
 -- VIEW
--- Html is defined as: elem [ attribs ][ children ]
--- CSS can be applied via class names or inline style attrib
-view : Model -> Html Msg
-view model =
-  div [ class "container", style [("margin-top", "30px"), ( "text-align", "center" )] ][    -- inline CSS (literal)
-    div [ class "row" ][
-      div [ class "col-xs-12" ][
-        div [ class "jumbotron" ][
-          img [ src "static/img/elm.jpg", style styles.img ] []                             -- inline CSS (via var)
-          , hello model                                                                     -- ext 'hello' component (takes 'model' as arg)
-          , p [] [ text ( "Elm Webpack Starter" ) ]
-          , button [ class "btn btn-primary btn-lg", onClick Increment ] [                  -- click handler
-            span[ class "glyphicon glyphicon-star" ][]                                      -- glyphicon
-            , span[][ text "FTW!" ]
-          ]
+
+
+view : Blogger -> Html Msg
+view blogger =
+    div [ class "container", style [ ( "text-align", "center" ) ] ]
+        [ ul [ class "nav nav-pills navbar-right" ]
+            [ li [ attribute "role" "presentation" ]
+                [ a [ href blogger.githubUrl ]
+                    [ text "Github" ]
+                ]
+            , li [ attribute "role" "presentation" ]
+                [ a [ href blogger.twitterUrl ]
+                    [ text "Twitter" ]
+                ]
+            ]
+        , div [ class "row", style [ ( "margin-top", "15em" ) ] ]
+            [ div [ class "col-xs-12" ]
+                [ img [ src blogger.profilePic, class "img-circle", style styles.img, onClick ToggleImage ] []
+                , h2 [] [ text blogger.name ]
+                , p [ class "lead" ] [ text (blogger.occupation ++ " at " ++ blogger.company) ]
+                ]
+            ]
         ]
-      ]
-    ]
-  ]
+
 
 
 -- CSS STYLES
+
+
 styles : { img : List ( String, String ) }
 styles =
-  {
-    img =
-      [ ( "width", "33%" )
-      , ( "border", "4px solid #337AB7")
-      ]
-  }
+    { img =
+        [ ( "width", "80px" )
+        , ( "cursor", "pointer" )
+        ]
+    }
