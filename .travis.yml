@@ -16,3 +16,4 @@ deploy:
   skip_cleanup: true
   region: ap-southeast-2
   local_dir: dist
+  cache_control: "max-age=31536000"
