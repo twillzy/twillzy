@@ -23,7 +23,8 @@ type alias Blogger =
     , company : String
     , profilePic : String
     , githubUrl : String
-    , twitterUrl : String
+    , twitterUrl : Maybe String
+    , instagramUrl : Maybe String
     }
 
 
@@ -34,7 +35,8 @@ twillzy =
     , company = "ThoughtWorks"
     , profilePic = "static/img/twillzy.jpg"
     , githubUrl = "https://github.com/twillzy"
-    , twitterUrl = "https://twitter.com/twillzy89"
+    , twitterUrl = Just "https://twitter.com/twillzy89"
+    , instagramUrl = Nothing
     }
 
 
@@ -45,7 +47,8 @@ prisonerFatCat =
     , company = "Google"
     , profilePic = "static/img/pris.jpg"
     , githubUrl = "#"
-    , twitterUrl = "https://www.instagram.com/pristhecat/"
+    , twitterUrl = Nothing
+    , instagramUrl = Just "https://www.instagram.com/pristhecat/"
     }
 
 
@@ -74,11 +77,11 @@ update msg blogger =
 view : Blogger -> Html Msg
 view blogger =
     let
-        socialMedia =
+        ( socialMedia, socialMediaUrl ) =
             if blogger == twillzy then
-                "Twitter"
+                ( "Twitter", Maybe.withDefault "#" blogger.twitterUrl )
             else
-                "Instagram"
+                ( "Instagram", Maybe.withDefault "#" blogger.instagramUrl )
     in
         div [ class "container" ]
             [ ul [ class "nav nav-pills navbar-right" ]
@@ -87,7 +90,7 @@ view blogger =
                         [ text "Github" ]
                     ]
                 , li [ attribute "role" "presentation" ]
-                    [ a [ href blogger.twitterUrl ]
+                    [ a [ href socialMediaUrl ]
                         [ text socialMedia ]
                     ]
                 ]
