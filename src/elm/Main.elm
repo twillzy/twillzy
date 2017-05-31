@@ -80,7 +80,7 @@ view blogger =
             else
                 "Instagram"
     in
-        div [ class "container", style [ ( "text-align", "center" ) ] ]
+        div [ class "container" ]
             [ ul [ class "nav nav-pills navbar-right" ]
                 [ li [ attribute "role" "presentation" ]
                     [ a [ href blogger.githubUrl ]
@@ -93,22 +93,9 @@ view blogger =
                 ]
             , div [ class "row" ]
                 [ div [ class "col-xs-12" ]
-                    [ img [ src blogger.profilePic, class "img-circle", style styles.img, onClick ToggleImage ] []
+                    [ img [ src blogger.profilePic, class "img-circle", onClick ToggleImage ] []
                     , h2 [] [ text blogger.name ]
                     , p [ class "lead" ] [ text (blogger.occupation ++ " at " ++ blogger.company) ]
                     ]
                 ]
             ]
-
-
-
--- CSS STYLES
-
-
-styles : { img : List ( String, String ) }
-styles =
-    { img =
-        [ ( "width", "80px" )
-        , ( "cursor", "pointer" )
-        ]
-    }

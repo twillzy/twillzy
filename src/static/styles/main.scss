@@ -9,9 +9,14 @@ html, body, #main {
 
 .container {
   height: 100%;
+  text-align: center;
   .row {
     position: relative;
     top: 50%;
     transform: translateY(-60%);
+    .img-circle {
+      width: 80px;
+      cursor: pointer;
+    }
   }
 }
