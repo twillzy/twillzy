@@ -84,7 +84,7 @@ view blogger =
                     [ text "Twitter" ]
                 ]
             ]
-        , div [ class "row", style [ ( "margin-top", "15em" ) ] ]
+        , div [ class "row" ]
             [ div [ class "col-xs-12" ]
                 [ img [ src blogger.profilePic, class "img-circle", style styles.img, onClick ToggleImage ] []
                 , h2 [] [ text blogger.name ]
