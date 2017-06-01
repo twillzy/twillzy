@@ -83,7 +83,7 @@ view blogger =
             else
                 ( "Instagram", Maybe.withDefault "#" blogger.instagramUrl )
     in
-        div [ class "container" ]
+        div [ class "container-fluid" ]
             [ ul [ class "nav nav-pills navbar-right" ]
                 [ li [ attribute "role" "presentation" ]
                     [ a [ href blogger.githubUrl ]
